@@ -5,23 +5,23 @@ import { createStore } from "redux";
 import { appReducer } from "./reducers";
 
 export const initialState = {
-  activeStep: 0
-  //   dittoNature: "Adamant",
-  //   deposit: {
-  //     species: gen6Pokemon[0],
-  //     ball: pokeballs[0],
-  //     gender: "Male",
-  //     nickname: "",
-  //     level: 0
-  //   },
-  //   player: {
-  //     language: "English",
-  //     game: "ORAS",
-  //     trainerDescription: ORASTrainers[0].name,
-  //     inGameName: "",
-  //     gtsMessage: "",
-  //     consoleRegion: ""
-  //   }
+  activeStep: 0,
+  dittoNature: "",
+  deposit: {
+    //species: gen6Pokemon[0],
+    //ball: pokeballs[0],
+    gender: "Male",
+    nickname: "",
+    level: 0
+  },
+  player: {
+    language: "English",
+    game: "",
+    //trainerDescription: ORASTrainers[0].name,
+    inGameName: "",
+    gtsMessage: "",
+    consoleRegion: ""
+  }
 };
 
 export const store = createStore(appReducer, initialState);

@@ -9,6 +9,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SendIcon from "@material-ui/icons/Send";
 import map from "lodash/map";
+import isEmpty from "lodash/isEmpty";
+
+import { connect } from "react-redux";
+import { setDittoNature, setDeposit, setPlayer } from "../redux/actions";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -22,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 130,
-    maxWidth: 250,
+    maxWidth: 150,
     width: "100%"
   },
   button: {
@@ -57,12 +61,19 @@ const games = ["ORAS", "XY", "Sun/Moon", "Ultra Sun/Ultra Moon"];
 
 function createMenuItems(list) {
   return map(list, listItem => {
-    return <MenuItem value={listItem}>{listItem}</MenuItem>;
+    return (
+      <MenuItem value={listItem} key={listItem}>
+        {listItem}
+      </MenuItem>
+    );
   });
 }
 
-export default function DittoPage() {
+export function DittoPage(props) {
   const classes = useStyles();
+
+  const { setDittoNature, setPlayer } = props;
+  const { dittoNature, game } = props;
 
   return (
     <Paper className={classes.paper} elevation={0}>
@@ -71,13 +82,24 @@ export default function DittoPage() {
       </Typography>
       <FormControl className={classes.formControl}>
         <InputLabel id="nature-label">Nature</InputLabel>
-        <Select labelId="nature-label" id="nature" value="" fullWidth>
+        <Select
+          labelId="nature-label"
+          id="nature"
+          value={dittoNature}
+          fullWidth
+          onChange={event => setDittoNature(event.target.value)}
+        >
           {createMenuItems(natures)}
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
         <InputLabel id="game-label">Game Version</InputLabel>
-        <Select labelId="game-label" id="game" value="">
+        <Select
+          labelId="game-label"
+          id="game"
+          value={game}
+          onChange={event => setPlayer("game", event.target.value)}
+        >
           {createMenuItems(games)}
         </Select>
       </FormControl>
@@ -86,9 +108,26 @@ export default function DittoPage() {
         color="primary"
         className={classes.button}
         endIcon={<SendIcon />}
+        disabled={isEmpty(dittoNature) || isEmpty(game) ? true : false}
       >
         GTS Deposit
       </Button>
     </Paper>
   );
 }
+
+const mapStateToProps = ({ dittoNature, player }) => ({
+  dittoNature: dittoNature,
+  game: player.game
+});
+
+const mapDispatchToProps = {
+  setDittoNature,
+  setPlayer,
+  setDeposit
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DittoPage);
