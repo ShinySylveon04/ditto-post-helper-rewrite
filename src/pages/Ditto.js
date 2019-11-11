@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SendIcon from "@material-ui/icons/Send";
+import map from "lodash/map";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -29,6 +30,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const natures = [
+  "Adamant",
+  "Brave",
+  "Bold",
+  "Relaxed",
+  "Impish",
+  "Timid",
+  "Jolly",
+  "Naive",
+  "Modest",
+  "Quiet",
+  "Calm",
+  "Sassy",
+  "Careful",
+  "HP Fighting",
+  "HP Fire",
+  "HP Flying",
+  "HP Grass",
+  "HP Ground",
+  "HP Ice",
+  "HP Rock"
+];
+
+const games = ["ORAS", "XY", "Sun/Moon", "Ultra Sun/Ultra Moon"];
+
+function createMenuItems(list) {
+  return map(list, listItem => {
+    return <MenuItem value={listItem}>{listItem}</MenuItem>;
+  });
+}
+
 export default function DittoPage() {
   const classes = useStyles();
 
@@ -40,13 +72,13 @@ export default function DittoPage() {
       <FormControl className={classes.formControl}>
         <InputLabel id="nature-label">Nature</InputLabel>
         <Select labelId="nature-label" id="nature" value="" fullWidth>
-          <MenuItem value="Adamant">Adamant</MenuItem>
+          {createMenuItems(natures)}
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
         <InputLabel id="game-label">Game Version</InputLabel>
         <Select labelId="game-label" id="game" value="">
-          <MenuItem value="XY">XY</MenuItem>
+          {createMenuItems(games)}
         </Select>
       </FormControl>
       <Button
