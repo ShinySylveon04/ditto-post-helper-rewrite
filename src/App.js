@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
+import Appbar from "./components/Appbar";
+import Stepper from "./components/Stepper";
+
+import MainLayout from "./layouts/MainLayout";
+
+import DittoPage from "./pages/Ditto";
+
+import { connect } from "react-redux";
+import { setActiveStep } from "./redux/actions";
+
+const stepNames = [
+  "Pick your Ditto",
+  "GTS Deposit",
+  "Player Info",
+  "Copy and submit"
+];
+
+export function App({ activeStep }) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Appbar />
+      <MainLayout>
+        <Stepper activeStep={activeStep} steps={stepNames} />
+        <DittoPage />
+      </MainLayout>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ activeStep }) => ({
+  activeStep: activeStep
+});
+
+const mapDispatchToProps = {
+  setActiveStep
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
