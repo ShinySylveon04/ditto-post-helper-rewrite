@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ditto-post-helper-rewrite/precache-manifest.0d1efb235643e413a5d098888aa59251.js"
+  "/ditto-post-helper-rewrite/precache-manifest.d6f767fb0f71ede96cd5ee508fe7213d.js"
 );
 
 self.addEventListener('message', (event) => {

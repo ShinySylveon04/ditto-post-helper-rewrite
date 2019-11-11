@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "010ff0674a4e2d8cbdb794f6303d2793",
+    "revision": "b0a5151b14e07f9f12a5af551ba9823e",
     "url": "/ditto-post-helper-rewrite/index.html"
   },
   {
